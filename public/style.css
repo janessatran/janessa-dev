@@ -276,7 +276,7 @@ img.project-image {
   .illustration {
     max-width: 600px;
     margin-block-start: -1rem;
-    margin-block-end: -5rem;
+    margin-block-end: -3rem;
     margin-inline-start: 8rem;
     z-index: -2;
   }
