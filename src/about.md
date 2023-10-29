@@ -12,5 +12,6 @@ Other things...
 
 - 😄 My Pronouns: She/Her
 - ⚡ Fun fact: I am a triplet!
+- 🌍 Elsewhere on the web: [Github](https://github.com/janessatran), [LinkedIn](https://www.linkedin.com/in/janessatran/), [Dev.to](https://dev.to/janessatran)
 
 Thank you for visitng my corner of the web- I hope you have a wonderful day!! :-)
