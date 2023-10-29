@@ -85,21 +85,9 @@ a:not(.btn--remix):visited {
   white-space: nowrap;
 }
 
-.subnote {
-  font-size: 0.6rem !important;
-  margin: auto 0;
-}
-
-div.subnote > a:hover {
-  background-color: none;
-}
-
 .divider {
   padding: 0 1rem;
 }
-/******************************************************************************
-END Glitch hello-app default styles
-******************************************************************************/
 
 /* Page structure */
 body {
@@ -272,8 +260,46 @@ img.project-image {
 
   .illustration {
     max-width: 400px;
-    margin: 1rem;
-    transform: rotate(0deg);
+    margin-block-start: 1rem;
+    margin-inline-start: 18rem;
     z-index: -2;
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .footer .links {
+    font-size: 0.7rem;
+    margin: 0 auto;
+  }
+
+  .illustration {
+    max-width: 600px;
+    margin-block-start: -1rem;
+    margin-block-end: -5rem;
+    margin-inline-start: 8rem;
+    z-index: -2;
+  }
+
+  main {
+    overflow-x: hidden;
+  }
+
+  .projects-wrapper {
+    margin: 1rem;
+  }
+
+  .footer a:not(.btn--remix):link,
+  a:not(.btn--remix):visited {
+    font-size: 0.7rem;
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  ul > li,
+  ol > li {
+    font-size: 0.7rem;
   }
 }
