@@ -1,0 +1,28 @@
+{
+  "name": "janessatran",
+  "version": "0.1.0",
+  "description": "Website of Janessa Tran, full-stack software engineer.",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "NODE_ENV=production eleventy"
+  },
+  "dependencies": {
+    "eleventy-plugin-seo": "0.5.2",
+    "luxon": "^3.4.0"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0"
+  },
+  "engines": {
+    "node": "14"
+  },
+  "repository": {
+    "url": ""
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "express"
+  ]
+}
