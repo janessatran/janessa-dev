@@ -3,8 +3,11 @@
   "version": "0.1.0",
   "description": "Website of Janessa Tran, full-stack software engineer.",
   "scripts": {
-    "start": "eleventy --serve",
-    "build": "NODE_ENV=production eleventy"
+    "assets:copy": "cp -R src/assets/* _site/",
+    "build": "npx @11ty/eleventy",
+    "dev": "npx @11ty/eleventy --serve --watch",
+    "start": "npx @11ty/eleventy --serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "eleventy-plugin-seo": "0.5.2",

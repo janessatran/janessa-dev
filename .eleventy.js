@@ -66,10 +66,13 @@ module.exports = function (eleventyConfig) {
   });
 
   return {
+    // When a passthrough file is modified, rebuild the pages:
+    passthroughFileCopy: true,
     dir: {
       input: "src",
       includes: "_includes",
-      output: "build",
+      data: "_data",
+      output: "_site",
     },
   };
 };

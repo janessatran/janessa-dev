@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🪄</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+
+
+    <title>Understanding Closures - Janessa Tran</title>
+
+<meta name="description" content="Full-stack software engineer">
+<meta name="robots" content="index,follow">
+<meta name="author" content="Janessa">
+
+<link rel="canonical" href="https://janessatran.com/posts/2022-07-02-closures-in-javascript/">
+
+<meta property="og:title" content="Understanding Closures - Janessa Tran">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://janessatran.com/posts/2022-07-02-closures-in-javascript/">
+<meta property="og:description" content="Full-stack software engineer">
+
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://janessatran.com/posts/2022-07-02-closures-in-javascript/">
+<meta name="twitter:title" content="Understanding Closures - Janessa Tran">
+<meta name="twitter:description" content="Full-stack software engineer">
+
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Understanding Closures</h1>
+
+    
+    
+    
+    <p>If you were to ask me last week about closures in JavaScript, I'd say... I've heard about it, but I'm not entirely sure how they work. Let's change that!</p>
+<h2>What is a Closure?</h2>
+<p>A closure is a function that remembers its outer variables and can access them.</p>
+<p>How?</p>
+<p>Functions remember where they were created using a hidden <code>[[Environment]]</code> property (aka the lexical environment), and then their code can access outer variables.</p>
+<p>When a variable is updated, it's updated in the Lexical Environment where it lives. This is how we're able to update variables within a function from outside of it!</p>
+<p>Let's take a look at how this works with an example.</p>
+<h2>Example please!</h2>
+<p>Open up the inspector and run this in the console.</p>
+<pre><code class="language-javascript">function makeCounter() {
+  let count = 0;
+  return function () {
+    return count++;
+  };
+}
+</code></pre>
+<p>If we call the outer function, it will just call the inner function.</p>
+<p>Enter this into the console and you will see, <code>makeCounter()</code>:</p>
+<pre><code>makeCounter()
+ƒ () {
+  return count++;
+}
+</code></pre>
+<p>Calling <code>makeCounter()</code> increments the <code>count</code> variable, but <code>count</code> isn't within the scope of the inner function. What happens then? When the code wants to access a variable, the inner lexical environment is searched first, then the outer one, then the more outer one, until it reaches the global one.</p>
+<p>The lexical environment of the outer function includes <code>count</code>, so the innter function will access <code>count</code> through there.</p>
+<pre><code class="language-javascript">let counter = makeCounter();
+counter(); // 0
+counter(); // 1
+counter(); // 2
+counter(); // 3
+</code></pre>
+<h3>How is this useful?</h3>
+<p>This is useful to encapsulate private information. For example, let's say we have an API that requires authorization.</p>
+<pre><code class="language-javascript">function authChecker() {
+  const authKey = &quot;authKey&quot;; // lets say this is encrypted
+  let authorize = () =&gt; {
+    console.log(&quot;Authorizing access&quot;);
+  };
+
+  let checkAuthKey = (key) =&gt; {
+    if (key === authKey) {
+      authorize();
+    } else {
+      console.log(&quot;Invalid authorization key&quot;);
+    }
+  };
+
+  let validateRequest = (key) =&gt; {
+    checkAuthKey(key);
+  };
+
+  return { validateRequest };
+}
+let a = authChecker();
+a.validateRequest(&quot;test&quot;); // Invalid authorization
+a.validateRequest(&quot;authKey&quot;); // Authorizing access
+</code></pre>
+<p>We want to be able to access the <code>authKey</code> when we call <code>validateRequest()</code>, but not have that variable public. This can be resolved by using closure functions!</p>
+<h3>Circling back</h3>
+<p>All in all, closures are inner functions with access to the variables/params of the outer function, even after the outer function is closed.</p>
+<p>Closure functions are able to access this data after the outer function is closed because of it’s lexical environment, which has references to it’s outer lexical environment.</p>
+<p>This is useful for several reasons including keeping sensitive information private.</p>
+<center>
+	<img src="https://i.imgur.com/KGgYGks.jpg" style="margin: 0 auto;" />
+</center>
+
+    <div class="controls">
+    
+    
+      <p>
+        <strong>Previous post</strong>: 
+        <a class="previous" href="/posts/2022-06-18-thingsilikecurrently/">Things I like at the moment</a>
+      </p>
+    
+    
+      <p>
+        <strong>Next post</strong>: 
+        <a class="next" href="/posts/2022-07-17-learning-log/">Learning Log</a>
+      </p>
+    
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/projects">Projects</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        
+        </div>
+    
+    <div class="subnote">This theme is an adaption of <a href="https://glitch.com/edit/#!/scintillating-nettle-pea?path=src%2F_includes%2Flayouts%2Fpage.njk%3A1%3A0" class="subnote">"scintillating-nettle-pea"</a>.</div>
+      </footer>
+    
+  </main>
+   
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+   <script>hljs.highlightAll();</script>
+
+  </body>
+</html>

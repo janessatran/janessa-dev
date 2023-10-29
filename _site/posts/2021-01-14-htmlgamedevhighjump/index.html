@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🪄</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+
+
+    <title>Adding the Ability to High Jump - Janessa Tran</title>
+
+<meta name="description" content="Full-stack software engineer">
+<meta name="robots" content="index,follow">
+<meta name="author" content="Janessa">
+
+<link rel="canonical" href="https://janessatran.com/posts/2021-01-14-htmlgamedevhighjump/">
+
+<meta property="og:title" content="Adding the Ability to High Jump - Janessa Tran">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://janessatran.com/posts/2021-01-14-htmlgamedevhighjump/">
+<meta property="og:description" content="Full-stack software engineer">
+
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://janessatran.com/posts/2021-01-14-htmlgamedevhighjump/">
+<meta name="twitter:title" content="Adding the Ability to High Jump - Janessa Tran">
+<meta name="twitter:description" content="Full-stack software engineer">
+
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Adding the Ability to High Jump</h1>
+
+    
+    
+    
+    <p><em>Psst! This is the fourth post in my series on learning html game development. You can find the other posts <a href="https://www.janessatran.com/tags/#game-dev">here</a>!</em></p>
+<p>This next section is going to cover how I added the ability to &quot;high jump&quot; (or fly, because you can technically continue to stay in the air 😂) into the game. This was probably one of the trickier features for me to figure out how to implement, partially due to my lack of experience with playing games and not knowing what a &quot;high jump&quot; even is. Nevertheless... let's get into how to add this feature!</p>
+<h2>Enabling Flappy Bird Mode</h2>
+<p>In this game, a &quot;high jump&quot; is essentially having the ability to jump while you are already jumping. Theoretically, this means you can continuously jump while already &quot;jumping&quot;, emulating a flappy-bird-like flying motion. Jumping is initiated when the user presses the up-arrow key. In order to add a &quot;high jump&quot;, then, we need to check if the player is already jumping to boost it.</p>
+<p>We can do this by making use of a method called <code>downDuration</code> from <code>Phaser.Key</code>.</p>
+<p>This method takes a parameter to define the duration within which a key is considered to have just been pressed. For example, if we pass in <code>downDuration(200)</code>, it will check if the last key pressed was less than 200 ms ago, if so, return true.</p>
+<img src="https://i.imgur.com/YiTcmet.png" alt="Image of Phaser Docs">
+Source: [https://phaser.io/docs/2.6.2/Phaser.Key.html#duration](https://phaser.io/docs/2.6.2/Phaser.Key.html#duration)
+<p>We can use this to check whether or not the additional jump (resulting from pressing the &quot;up&quot; key again after already having pressed it), was done within a short enough time frame that we can make the sprite &quot;high jump&quot;.</p>
+<p>We've already defined the signal event in <code>PlayState.init()</code> so we can modify it to add in this feature:</p>
+<pre><code class="language-js">PlayState.init = function (data) {
+   ...
+    // Subscribe key to signal (event)
+    const JUMP_HOLD = 200;
+    this.keys.up.onDown.add(function () {
+        if (this.keys.up.downDuration(JUMP_HOLD)) {
+            let didJump = this.hero.jump();
+            if (didJump) {
+                this.sfx.jump.play();
+            }
+        }
+        else {
+            this.hero.stopHighJump();
+        }
+    }, this)
+    ...
+};
+</code></pre>
+<p>We also modify the <code>Hero</code> class <code>jump</code> method, which previously set the y-velocity only if <code>canJump</code> was true (when the body of the sprite is touching the platform sprites).</p>
+<p>The modification involves making it so that if <code>this.highJumping</code> is true, it will <em>also</em> set the y velocity.</p>
+<p><em>Note:</em> <em>a negative velocity means the sprite will move in the opposite direction.</em></p>
+<pre><code class="language-js">Hero.prototype.jump = function () {
+  const JUMP_SPEED = 400;
+  let canJump = this.body.touching.down; // check if a body is touching another body
+  if (canJump || this.highJumping) {
+    this.body.velocity.y = -JUMP_SPEED;
+    this.highJumping = true;
+  }
+  return canJump;
+};
+</code></pre>
+<p>Lastly, we want to ensure that the high jump only works if the body is already jumping. If it's not already jumping (which we know from our signal event on the up-arrow key), we want to stop the high jump.</p>
+<p>We create a method <code>stopHighJump</code> that we call in the initialization of our <code>PlayState</code> to set <code>highJumping</code> to false, preventing the body from continuously increasing in velocity:</p>
+<pre><code class="language-js">Hero.prototype.stopHighJump = function () {
+  this.highJumping = false;
+};
+</code></pre>
+<h2>Jump-tastic!</h2>
+<p>There you have it, the ability to high jump! Let me know if you are able to win the game without collecting any coins or killing any spiders 😉</p>
+<ul>
+<li><strong>Source code</strong>: <a href="https://github.com/janessatran/html5game/commit/17ffabc93a08845db41fa84be25380a906f71f7b">Add high jump ability commit</a></li>
+<li><strong>Link to game</strong>: <a href="https://janessatran.github.io/html5game/">Adventures of Leat</a></li>
+</ul>
+
+    <div class="controls">
+    
+    
+      <p>
+        <strong>Previous post</strong>: 
+        <a class="previous" href="/posts/2021-01-12-htmlgamemusic/">Adding Music to the Game</a>
+      </p>
+    
+    
+      <p>
+        <strong>Next post</strong>: 
+        <a class="next" href="/posts/2021-01-15-htmlgamedevherodyinganimation/">Animating the Hero&#39;s Death</a>
+      </p>
+    
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/projects">Projects</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        
+        </div>
+    
+    <div class="subnote">This theme is an adaption of <a href="https://glitch.com/edit/#!/scintillating-nettle-pea?path=src%2F_includes%2Flayouts%2Fpage.njk%3A1%3A0" class="subnote">"scintillating-nettle-pea"</a>.</div>
+      </footer>
+    
+  </main>
+   
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+   <script>hljs.highlightAll();</script>
+
+  </body>
+</html>

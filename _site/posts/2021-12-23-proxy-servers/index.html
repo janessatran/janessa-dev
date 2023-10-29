@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    
+    
+    <meta charset="utf-8" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🪄</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your new 11ty blog" />
+    <link rel="stylesheet" type="text/css" href="/public/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+
+
+    <title>Proxy Servers - Janessa Tran</title>
+
+<meta name="description" content="Full-stack software engineer">
+<meta name="robots" content="index,follow">
+<meta name="author" content="undefined">
+
+<link rel="canonical" href="https://janessatran.com/posts/2021-12-23-proxy-servers/">
+
+<meta property="og:title" content="Proxy Servers - Janessa Tran">
+<meta property="og:type" content="article">
+
+<meta property="og:url" content="https://janessatran.com/posts/2021-12-23-proxy-servers/">
+<meta property="og:description" content="Full-stack software engineer">
+
+
+<meta name="twitter:card" content="summary">
+
+<meta name="twitter:url" content="https://janessatran.com/posts/2021-12-23-proxy-servers/">
+<meta name="twitter:title" content="Proxy Servers - Janessa Tran">
+<meta name="twitter:description" content="Full-stack software engineer">
+
+
+
+  </head>
+  <body>
+  <main>
+    
+    
+  
+    
+
+
+<div class="wrapper post">
+  <div>
+    
+    <h1 class='postTitle'>Proxy Servers</h1>
+
+    
+    
+    
+    <p>During a project at work, my teammate and I were having issues trying to connect to an API that was behind a VPN. The question of whether or not our the request was going through a proxy server came up. I hadn't heard of a proxy server before so I thought I would write about what it is.</p>
+<h2>What's a proxy server and how does it work?</h2>
+<p>A <strong>proxy server</strong> acts as a gateway between you and the internet.</p>
+<p>The way it works is, when you send a web request your request goes to the proxy server first. Then, the proxy server makes your web request on your behalf and collects the response from the web server. When the request is intercepted by the proxy, it may forward the request and it may modify it. Finally, the proxy server returns you the web page data.</p>
+<p>There are two main types, a <strong>forward proxy</strong> which handles requests from and to anywhere on the internet. There is also a <strong>reverse proxy</strong> which takes requests from the Internet and forwards them to servers in an internal network.</p>
+<p>It offers a few benefits including:</p>
+<ul>
+<li>Privacy, allows you to surf internet anonymously.</li>
+<li>Speed, cache data to speed up common requests.</li>
+<li>Reduces bandwidth.</li>
+<li>Activity Logging.</li>
+</ul>
+<h2>How does one identify if a request is coming from a proxy server?</h2>
+<p>There's not a 100% reliable way to tell, but the presence of any of the following headers is a strong indication that the request was routed from a proxy server:</p>
+<pre><code>via:
+forwarded:
+x-forwarded-for:
+client-ip:
+</code></pre>
+<h2>Are there different types of proxies? What are they?</h2>
+<p>There are a few different types, but the most comment are:</p>
+<ol>
+<li><strong>HTTP proxies</strong>: You'd use these to access websites. These proxies only work with HTTP and HTTPs webpages. You can use this type of proxy to access geo-restricted content (although that may violate the user agreement with your content provider).</li>
+<li><strong>SOCKS5 proxies</strong>: Unlike HTTP proxies, these can be used to access video streaming services, file sharing sites, and games online.</li>
+<li><strong>Transparent proxies</strong>: These work without modifying the request and responses (which is why it's called transparent). You might have used a transparent proxy without realizing it. Employers, schools, libraries might set up a transparent proxy to filter user's content when they connect ot the internet or block users from accessing certain websites.</li>
+</ol>
+
+    <div class="controls">
+    
+    
+      <p>
+        <strong>Previous post</strong>: 
+        <a class="previous" href="/posts/2021-12-22-sql-vs-nosql/">System Design: SQL vs NoSQL</a>
+      </p>
+    
+    
+      <p>
+        <strong>Next post</strong>: 
+        <a class="next" href="/posts/2021-12-24-jwt-tokens/">JWT Tokens</a>
+      </p>
+    
+    </div>
+  </div>
+</div>
+
+      <footer class="footer">
+        <div class="links">
+          <a href="/">Home</a>
+          <span class="divider">|</span>
+          <a href="/posts">Posts</a>
+          <span class="divider">|</span>
+          <a href="/projects">Projects</a>
+          <span class="divider">|</span>
+          <a href="/about">About</a>
+        
+        </div>
+    
+    <div class="subnote">This theme is an adaption of <a href="https://glitch.com/edit/#!/scintillating-nettle-pea?path=src%2F_includes%2Flayouts%2Fpage.njk%3A1%3A0" class="subnote">"scintillating-nettle-pea"</a>.</div>
+      </footer>
+    
+  </main>
+   
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+   <script>hljs.highlightAll();</script>
+
+  </body>
+</html>
