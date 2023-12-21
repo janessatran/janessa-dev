@@ -1,11 +1,14 @@
 :root {
-  --color-bg: #fff1f1;
-  --color-text-main: #000000;
-  --color-primary: #adadff;
+  --color-bg: #efebe0;
+  --color-text-main: #285430;
+  --color-primary: #a4be7b;
   --wrapper-height: 85vh;
   --image-max-width: 320px;
   --font-family: "HK Grotesk";
   --font-family-header: "HK Grotesk";
+  --font-family-body: "Merriweather";
+  --inline-code-background-color: #ffd376;
+  --inline-code-font-size: 0.8rem;
 }
 
 /* Basic page style resets */
@@ -28,6 +31,8 @@
   src: url("https://cdn.glitch.me/605e2a51-d45f-4d87-a285-9410ad350515%2FHKGrotesk-Bold.otf?v=1603136323437")
     format("opentype");
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Anonymous+Pro&family=Inter:wght@100;200;300&family=Lato:wght@300&family=Merriweather:wght@300&display=swap");
 
 /* Our remix on glitch button */
 .btn--remix {
@@ -91,7 +96,7 @@ a:not(.btn--remix):visited {
 
 /* Page structure */
 body {
-  font-family: var(--font-family);
+  font-family: var(--font-family-body);
   background-color: var(--color-bg);
 }
 
@@ -116,7 +121,7 @@ body {
 p {
   margin: 0 0 1rem 0;
   line-height: 1.5 !important;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 h1,
 h2,
@@ -220,7 +225,7 @@ a:hover {
 /* Post */
 .post {
   place-items: normal;
-  margin: 6rem 10rem;
+  margin: 6rem 15rem;
 }
 
 .postTitle {
@@ -302,4 +307,14 @@ img.project-image {
   ol > li {
     font-size: 0.7rem;
   }
+}
+
+code {
+  font-size: var(--inline-code-font-size);
+  background-color: var(--inline-code-background-color);
+}
+
+table {
+  overflow: auto;
+  display: block;
 }
