@@ -9,5 +9,5 @@ layout: layouts/home.njk
 
 <div class="center">
   <h1 class="main-title">Janessa Tran</h1>
-  <span>creative software engineer<span>
+  <span class="subtitle">creative software engineer<span>
 </div>
