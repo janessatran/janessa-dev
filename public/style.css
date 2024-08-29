@@ -1,12 +1,12 @@
 :root {
-  --color-bg: #efebe0;
+  --color-bg: #ffffff;
   --color-text-main: #285430;
   --color-primary: #a4be7b;
-  --wrapper-height: 85vh;
+  --wrapper-height: 100vh;
   --image-max-width: 320px;
-  --font-family: "HK Grotesk";
-  --font-family-header: "HK Grotesk";
-  --font-family-body: "Merriweather";
+  --font-family: "Overpass Mono";
+  --font-family-header: "Overpass Mono";
+  --font-family-body: "Overpass Mono";
   --inline-code-background-color: #ffd376;
   --inline-code-font-size: 0.8rem;
 }
@@ -60,10 +60,21 @@
   background-color: #d0fff1;
 }
 
+.center {
+  text-align: center;
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 /* Navigation grid */
 .footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 1rem auto 0;
   padding: 1rem 0 0.75rem 0;
   width: 100%;
@@ -140,7 +151,7 @@ h1 {
   margin-bottom: 1.75rem;
   font-size: 5rem;
   display: inline-flex;
-  color: #3e6f00;
+  color: #e2b606;
   /* color: #2800ff; */
 }
 
@@ -205,6 +216,7 @@ a:hover {
 /* Layout: Home */
 .home {
   justify-content: left;
+  background-image: url("https://i.imgur.com/kp4aI4t.jpeg");
 }
 .webpage-illustration-container {
   display: flex;
