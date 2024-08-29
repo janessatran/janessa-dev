@@ -1,7 +1,7 @@
 :root {
   --color-bg: #ffffff;
   --color-text-main: #285430;
-  --color-primary: #a4be7b;
+  --color-primary: #6c9f1b76;
   --wrapper-height: 100vh;
   --image-max-width: 320px;
   --font-family: "Overpass Mono";
@@ -63,12 +63,16 @@
 .center {
   text-align: center;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column;
   flex-wrap: nowrap;
   align-content: center;
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+.main-title {
+  margin: 0;
 }
 
 /* Navigation grid */
