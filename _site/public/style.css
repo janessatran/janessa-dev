@@ -224,7 +224,7 @@ a:hover {
 }
 
 /* Layout: Home */
-.home {
+.home-page-cover {
   justify-content: left;
   background-image: url("https://i.imgur.com/kp4aI4t.jpeg");
   background-size: cover;
